@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <script src="main.js"></script>
+    <title>Gokudlham - Vidyalaya</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <!-- CSS only -->
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+</head>
+<body class="container">
+    <div>logged in as aarsh</div>
+    <form action="/vidyalaya/logmeout" methos="POST">
+        <input type="hidden" name="csrfmiddlewaretoken"
+            value="6E9w1jLeHWAAmSmr6JS6HtAGPb0U6r9DjMpok1439yJ4J6a1NcBXBNFVlRNJI68C">
+        <button type="submit">logout</button>
+    </form>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <img src="/static/img/gd_logo.png" alt="gokuldham_logo" height="5%" width="5%" />
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/vidyalaya/dashboard">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vidyalaya/offerings">Offerings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vidyalaya/classes/">Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vidyalaya/students/">Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vidyalaya/events">Events</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Reports
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item disabled" href="#">Attandance by class</a>
+                            <a class="dropdown-item disabled" href="#">Attandance by offering</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item disabled" href="#">Demographics</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script src="signup.js"></script>
+    <link rel="stylesheet" href="signup.css" type="text/css" />
+    <div class="container">
+        <div class="row">
+            <div class="col-11">
+                <h1>Student Onboarding</h1>
+            </div>
+            <div class="col">
+                <i class="fa-solid fa-cart-shopping"></i> $ <span id="cart-total">0.00</span>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                <div class="px-0 pt-4 pb-0 mt-3 mb-3">
+                    <form id="msform">
+                        <!-- progress bar -->
+                        <ul id="progressbar">
+                            <li class="active" id="student_personal" data-toggle="tooltip" data-placement="top"
+                                title="Student and Parent/Guardian Info (Name, Address, Contact, Medical Notes, etc.) - Est Time 3 minutes">
+                                <strong>Personal</strong>
+                            </li>
+                            <li id="offerings" data-toggle="tooltip" data-placement="top"
+                                title="Select student's enrollments. - Est time 1 minute">
+                                <strong>Offerings</strong>
+                            </li>
+                            <li id="parent_volunteer_sponsor" data-toggle="tooltip" data-placement="top"
+                                title="How would you like to help us help you? Your chance sponsor lunches for Vidyalaya. - Est time 2 minutes">
+                                <strong>Sponsor & Volunteer</strong>
+                            </li>
+                            <li id="payment" data-toggle="tooltip" data-placement="top"
+                                title="Checkout and payment - Est time 2 minutes">
+                                <strong>Pay</strong>
+                            </li>
+                            <li id="confirm" data-toggle="tooltip" data-placement="top"
+                                title="Payment Confirmation & Roll Number allocation - Est time 1 minute">
+                                <strong>Finish</strong>
+                            </li>
+                        </ul>
+                        <div class="progress" data-toggle="tooltip" data-placement="top"
+                            title="Shows your progress in the registration process">
+                            <div id="signupprogress" class="progress-bar" role="progressbar" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                        <!-- field sets -->
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="steps">Step 1 - 5</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="container">
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label for="tbStudnetGokuldhamId" class="form-label">GD ID</label>
+                                                    <input type="text" class="form-control" id="tbStudnetGokuldhamId"
+                                                        placeholder="Gokuldham ID (on step 5)" data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="On the last payment confirmation step, this number would be assigned."
+                                                        disabled />
+                                                </div>
+                                                <div class="col">
+                                                    <label for="tbStudnetRollNumber" class="form-label">Roll #</label>
+                                                    <input type="text" class="form-control" id="tbStudnetRollNumber"
+                                                        placeholder="Roll Number (on step 5)" data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="On the last payment confirmation step, this number would be assigned."
+                                                        disabled />
+                                                </div>
+                                                <div class="col">
+                                                    <label for="tbStudnetSecondaryRollNumber" class="form-label">
+                                                        2nd Roll
+                                                        #
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="tbStudnetSecondaryRollNumber"
+                                                        placeholder=" Secondary Roll Number (on step 5)"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="On the last payment confirmation step, this number would be assigned."
+                                                        disabled />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label for="tbStudnetFirstName" class="form-label">Name</label>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetFirstName"
+                                                        data-toggle="tooltip" data-placement="top" data-html="true"
+                                                        title="Exactly as it appears on student's official ID"
+                                                        placeholder="First" />
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetMiddleName"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Exactly as it appears on student's official ID"
+                                                        placeholder="Middle" />
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetLastName"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Exactly as it appears on student's official ID"
+                                                        placeholder="Last" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label for="tbStudnetBirthday" class="form-label">Birthday</label>
+                                                    <input type="date" class="form-control" id="tbStudnetBirthday"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Once entered, it can never be changed again. Exactly as it appears on student's official ID."
+                                                        placeholder=" Secondary Roll Number (auto)" />
+                                                </div>
+                                                <div class="col">
+                                                    <label for="ddStudentGender" class="form-label">Gender</label>
+                                                    <select id="ddStudentGender" class="form-select" required="">
+                                                        <option value="unspecified">
+                                                        </option>
+                                                        <option value="female">
+                                                            Girl
+                                                        </option>
+                                                        <option value="male">
+                                                            Boy
+                                                        </option>
+                                                        <option value="other">
+                                                            Other
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="ddStudnetGrade" class="form-label">Grade</label>
+                                                    <select id="ddStudnetGrade" class="form-select" required="">
+                                                        <option value="unspecified">
+                                                        </option>
+                                                        <option value="K">
+                                                            K
+                                                        </option>
+                                                        <option value="1">
+                                                            1
+                                                        </option>
+                                                        <option value="2">
+                                                            2
+                                                        </option>
+                                                        <option value="3">
+                                                            3
+                                                        </option>
+                                                        <option value="4">
+                                                            4
+                                                        </option>
+                                                        <option value="5">
+                                                            5
+                                                        </option>
+                                                        <option value="6">
+                                                            6
+                                                        </option>
+                                                        <option value="7">
+                                                            7
+                                                        </option>
+                                                        <option value="8">
+                                                            8
+                                                        </option>
+                                                        <option value="9">
+                                                            9
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label for="ddStudentTShirtSize" class="form-label">Shirt
+                                                        Size</label>
+                                                    <select id="ddStudentTShirtSize" class="form-select" required="">
+                                                        <option value="unspecified">
+                                                        </option>
+                                                        <option value="youth_s">
+                                                            Youth (S)
+                                                        </option>
+                                                        <option value="youth_m">
+                                                            Youth (M)
+                                                        </option>
+                                                        <option value="youth_l">
+                                                            Youth (L)
+                                                        </option>
+                                                        <option value="youth_xl">
+                                                            Youth (XL)
+                                                        </option>
+                                                        <option value="adult_s">
+                                                            Adult (S)
+                                                        </option>
+                                                        <option value="adult_m">
+                                                            Adult (M)
+                                                        </option>
+                                                        <option value="adult_l">
+                                                            Adult (L)
+                                                        </option>
+                                                        <option value="adult_xl">
+                                                            Adult (XL)
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="ddStudentAllergy" class="form-label">Allergy</label>
+                                                    <select id="ddStudentAllergy" class="form-select" required="">
+                                                        <option value="no_allergy">
+                                                            No Allergy
+                                                        </option>
+                                                        <option value="tree_nut">
+                                                            Tree Nut
+                                                        </option>
+                                                        <option value="drug">
+                                                            Drug
+                                                        </option>
+                                                        <option value="food">
+                                                            Food
+                                                        </option>
+                                                        <option value="mold">
+                                                            Mold
+                                                        </option>
+                                                        <option value="pollen">
+                                                            Pollen
+                                                        </option>
+                                                        <option value="dust">
+                                                            Dust
+                                                        </option>
+                                                        <option value="skin">
+                                                            Skin
+                                                        </option>
+                                                        <option value="other">
+                                                            Other
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col" style="display:none;">
+                                                    <label for="ddStudentDiet" class="form-label">Diet</label>
+                                                    <select id="ddStudentDiet" class="form-select" required="">
+                                                        <option value="vegetarian">
+                                                            Vegetarian
+                                                        </option>
+                                                        <option value="vegan">
+                                                            Plant Based (Vegan)
+                                                        </option>
+                                                        <option value="diabetic">
+                                                            Diabetic
+                                                        </option>
+                                                        <option value="lactose_intolerance">
+                                                            Lactose Intolerance
+                                                        </option>
+                                                        <option value="gluten_free">
+                                                            Gluten Free
+                                                        </option>
+                                                        <option value="other">
+                                                            Other
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="tbStudnetAddress1" class="form-label">Address</label>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetAddress1"
+                                                        placeholder="Address Line 1" />
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetAddress2"
+                                                        placeholder="Address Line 2" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetAddress3"
+                                                        placeholder="Address Line 3" />
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetAddress4"
+                                                        placeholder="Address Line 4" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetCity"
+                                                        placeholder="City" />
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetState"
+                                                        placeholder="State" />
+                                                </div>
+                                                <div class="col">
+                                                    <input type="number" class="form-control" id="tbStudnetZip"
+                                                        maxlength="5" min="00000" max="99999" placeholder="Zip" />
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetCountry"
+                                                        placeholder="Country" />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="tbStudentComment">General Comment</label>
+                                                        <textarea class="form-control" id="tbStudentComment"
+                                                            rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="tbStudentMedicalNotes">Medical Notes</label>
+                                                        <textarea class="form-control" id="tbStudentMedicalNotes"
+                                                            rows="5"
+                                                            placeholder="Specify medications, shots, allergy response, restrictions, etc."
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="Medical notes in case if your child needs special medical attention."></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="next" class="next btn btn-dark" value="Next" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="steps">Step 2 - 5</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="container">
+                                            <div class="row mb-3">
+                                                <div class="col-1">
+                                                    <input type="checkbox" />
+                                                </div>
+                                                <div class="col-10">Pushtimarg</div>
+                                                <div class="col">$200</div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-1">
+                                                    <input type="checkbox" />
+                                                </div>
+                                                <div class="col-10">Gujarati</div>
+                                                <div class="col">
+                                                    $200
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-1">
+                                                    <input type="checkbox" />
+                                                </div>
+                                                <div class="col-10">
+                                                    Summer Camp 2023 - Day Camp
+                                                </div>
+                                                <div class="col">
+                                                    $125
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-1">
+                                                    <input type="checkbox" />
+                                                </div>
+                                                <div class="col-10">
+                                                    Summer Camp 2023 - Overnight
+                                                </div>
+                                                <div class="col">
+                                                    $200
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-secondary" value="Previous" />
+                            <input type="button" name="next" class="next btn btn-dark" value="Next"
+                                id="btStudentSave0" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="steps">
+                                                Step 3 - 5
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h3>
+                                                        Volunteer
+                                                    </h3>
+                                                    Gokuldham has always been about community.
+                                                    Not only it can help gain professional experience,
+                                                    but also brings people together, promotes personal
+                                                    growth and strengthens the community. This is your
+                                                    unique chance to give back, fuel your niche and make
+                                                    an impact by helping us helping you better.
+                                                    <br />
+                                                    <br />
+                                                </div>
+                                                <div class="col">
+                                                    <h3>
+                                                        Sponsor Lunch for Vidyalaya
+                                                    </h3>
+                                                    To share is to care. Let us know if you would like to
+                                                    feed Vidyalaya with food and, love. We also accept online
+                                                    donations for Haveli Building Renovation, Bhet, Phool Ghar,
+                                                    Smaagri, Library, Nyochhavar, Annakut <a
+                                                        href="https://gokuldham.org/en/ViewAllDonations/">here</a>.
+                                                    <br />
+                                                    <br />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input me-1" type="checkbox"
+                                                                value="" id="firstCheckboxStretched" />
+                                                            <label class="form-check-label stretched-link"
+                                                                for="firstCheckboxStretched">
+                                                                Kitchen
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input me-1" type="checkbox"
+                                                                value="" id="secondCheckboxStretched" />
+                                                            <label class="form-check-label stretched-link"
+                                                                for="secondCheckboxStretched">
+                                                                Vidyalaya
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input me-1" type="checkbox"
+                                                                value="" id="thirdCheckboxStretched" />
+                                                            <label class="form-check-label stretched-link"
+                                                                for="thirdCheckboxStretched">
+                                                                Teaching
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input me-1" type="checkbox"
+                                                                value="" id="fourthCheckboxStretched" />
+                                                            <label class="form-check-label stretched-link"
+                                                                for="fourthCheckboxStretched">
+                                                                Traffic Control (During Events)
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input me-1" type="checkbox"
+                                                                value="" id="fifthCheckboxStretched" />
+                                                            <label class="form-check-label stretched-link"
+                                                                for="fifthCheckboxStretched">
+                                                                Events
+                                                            </label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <input class="form-check-input me-1" type="checkbox"
+                                                                value="" id="sixthCheckboxStretched" />
+                                                            <label class="form-check-label stretched-link"
+                                                                for="sixthCheckboxStretched">
+                                                                Pushthimarg Neej Mandir
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            Every Sunday:
+                                                            <label for="from">
+                                                                From
+                                                            </label>
+                                                            <input type="text" class="form-control" id="from"
+                                                                name="from" />
+                                                            <label for="to">
+                                                                to
+                                                            </label>
+                                                            <input type="text" class="form-control" id="to" name="to" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        Your contact Information
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="phone" class="form-control"
+                                                            placeholder="WhatsApp Number" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="email" class="form-control"
+                                                            placeholder="E-mail Address" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-secondary" value="Previous" />
+                            <input type="button" name="next" class="next btn btn-dark" value="Next" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="steps">
+                                                Step 4 - 5
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="container">
+                                            <div class="row mb-3">
+                                                <label for="tbStudnetAddress1" class="form-label">
+                                                    Credit Card
+                                                </label>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="tbStudnetAddress1"
+                                                        placeholder="Card Number" />
+                                                </div>
+                                                <div class="col-1">
+                                                    <input type="text" class="form-control" id="tbStudnetAddress2"
+                                                        placeholder="CVV" />
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <input type="text" class="form-control" id="tbStudnetAddress3"
+                                                        placeholder="Exp" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous btn btn-secondary" value="Previous" />
+                            <input type="button" name="next" class="next btn btn-dark" value="Next" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="fs-title">
+                                            Finish:
+                                        </h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <h2 class="steps">
+                                            Step 5 - 5
+                                        </h2>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <h2 class="purple-text text-center">
+                                    <strong>SUCCESS !</strong>
+                                </h2>
+                                <br>
+                                <div class="row justify-content-center">
+                                    <div class="col-3">
+                                        <img src="https://i.imgur.com/GwStPmg.png" class="fit-image">
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="row justify-content-center">
+                                    <div class="col-7 text-center">
+                                        <h5 class="purple-text text-center">
+                                            You Have Successfully Signed Up
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-center text-lg-start">
+        <div>---</div>
+        <div>Pushtimargiya Vaishnav Samaj Of Southeast Usa, Inc</div>
+    </footer>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+</body>
+</html>
