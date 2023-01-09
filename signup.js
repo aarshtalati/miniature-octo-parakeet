@@ -1,4 +1,191 @@
 $(document).ready(function () {
+    var fv = $("#msform").validate({
+      rules: {
+        /* step 1 validations */
+        tbStudnetFirstName: {
+          required: true,
+        },
+        tbStudnetMiddleName: {
+          required: true,
+        },
+        tbStudnetLastName: {
+          required: true,
+        },
+        tbStudnetBirthday: {
+          required: true,
+        },
+        ddStudentGender: {
+          required: true,
+        },
+        ddStudnetGrade: {
+          required: true,
+        },
+        ddStudentTShirtSize: {
+          required: true,
+        },
+        ddStudentAllergy: {
+          required: true,
+        },
+        tbStudnetAddress1: {
+          required: true,
+        },
+        tbStudnetAddress2: {
+          required: true,
+        },
+        tbStudnetAddress3: {
+          required: true,
+        },
+        tbStudnetAddress4: {
+          required: true,
+        },
+        tbStudnetCity: {
+          required: true,
+        },
+        tbStudnetState: {
+          required: true,
+        },
+        tbStudnetZip: {
+          required: true,
+          digits: true,
+        },
+        tbStudnetCountry: {
+          required: true,
+        },
+        tbStudentComment: {
+          required: true,
+        },
+        tbStudentMedicalNotes: {
+          required: true,
+        },
+        /* step 2 validations */
+        tbStudentPackage: {
+          required: true,
+        },
+        /* step 3 validations */
+        /* volunteerOption: {
+          required: true,
+        },
+        from: {
+          required: true,
+        },
+        to: {
+          required: true,
+        }, */
+        /* step 4 validations */
+        tbStudnetCardNumber: {
+          required: true,
+        },
+        tbStudnetCardCVV: {
+          required: true,
+        },
+        tbStudnetCardExp: {
+          required: true,
+        },
+      },
+      messages: {
+        tbStudnetFirstName: {
+          required: "First name is required",
+        },
+        tbStudnetMiddleName: {
+          required: "Middle name is required",
+        },
+        tbStudnetLastName: {
+          required: "Last name is required",
+        },
+        tbStudnetBirthday: {
+          required: "Birthday is required",
+        },
+        ddStudentGender: {
+          required: "Gender is required",
+        },
+        ddStudnetGrade: {
+          required: "Grade is required",
+        },
+        ddStudentTShirtSize: {
+          required: "Shirt Size is required",
+        },
+        ddStudentAllergy: {
+          required: "Allergy is required",
+        },
+        tbStudnetAddress1: {
+          required: "Address1 is required",
+        },
+        tbStudnetAddress2: {
+          required: "Address2 is required",
+        },
+        tbStudnetAddress3: {
+          required: "Address3 is required",
+        },
+        tbStudnetAddress4: {
+          required: "Address4 is required",
+        },
+        tbStudnetCity: {
+          required: "City is required",
+        },
+        tbStudnetState: {
+          required: "State is required",
+        },
+        tbStudnetZip: {
+          required: "Zip is required",
+          digits: "Please enter digits only",
+        },
+        tbStudnetCountry: {
+          required: "Country is required",
+        },
+        tbStudentComment: {
+          required: "Comment is required",
+        },
+        tbStudentMedicalNotes: {
+          required: "Medical notes are required",
+        },
+        /* step 2 validations */
+        tbStudentPackage: {
+          required: "Select atleast one package",
+        },
+        /* step 3 validations */
+       /*  volunteerOption: {
+          required: "Volunteet is required",
+        },
+        from: {
+          required: "from date is required",
+        },
+        to: {
+          required: "to date is required",
+        }, */
+        /* step 4 validations */
+        tbStudnetCardNumber: {
+          required: "Card number is required",
+        },
+        tbStudnetCardCVV: {
+          required: "Card cvv is required",
+        },
+        tbStudnetCardExp: {
+          required: "Card exp is required",
+        },
+      },
+      errorElement: "p",
+      errorClass: "form-error",
+      errorPlacement: function (error, element) {
+        if (element.attr("name") == "tbStudentPackage") {
+          error.insertAfter($("#package_last_row"));
+        } else if (element.attr("name") == "volunteerOption") {
+          error.insertAfter($("#volunteer_option_wrapper"));
+        } else {
+          error.insertAfter(element);
+        }
+      },
+      focusInvalid: false,
+      invalidHandler: function (form, validator) {
+        if (!validator.numberOfInvalids()) return;
+
+        $("html, body").animate(
+          {
+            scrollTop: $(validator.errorList[0].element).offset().top - 300,
+          },
+          100
+        );
+      },
+    });
 
     var current_fs, next_fs, previous_fs; //fieldsets
     var opacity;
@@ -31,9 +218,11 @@ $(document).ready(function () {
 
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
-
-        //Add Class Active
-        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        if (fv.form()) {
+          //Add Class Active
+          $("#progressbar li")
+            .eq($("fieldset").index(next_fs))
+            .addClass("active");
 
         //show the next fieldset
         next_fs.show();
@@ -43,15 +232,16 @@ $(document).ready(function () {
                 // for making fieldset appear animation
                 opacity = 1 - now;
 
-                current_fs.css({
-                    'display': 'none',
-                    'position': 'relative'
-                });
-                next_fs.css({ 'opacity': opacity });
-            },
-            duration: 500
-        });
-        setProgressBar(++current);
+                  current_fs.css({
+                      'display': 'none',
+                      'position': 'relative'
+                  });
+                  next_fs.css({ 'opacity': opacity });
+              },
+              duration: 500
+          });
+          setProgressBar(++current);
+        }
     });
 
     $(".previous").click(function () {
@@ -146,4 +336,32 @@ $(document).ready(function () {
         return false;
     })
 
+    $("input[name=volunteerOption]").click(function() {
+        var checked = $("input[name=volunteerOption]:checked").length;
+        if (checked > 0) {
+            $("#tbStudentWhatsappNumber").rules("add", { required: true,messages: {required: "WhatsApp number is required"}});
+            $("#tbStudentEmail").rules("add", {
+              required: true,
+              messages: { required: "Email is required" },
+            });
+        }else{
+            $("#tbStudentWhatsappNumber").rules("remove", "required");
+            $("#tbStudentEmail").rules("remove", "required");
+        }
+    });
+    var cart_total = parseFloat($("#cart-total").html());
+    $("input[name=tbStudentPackage]").click(function () {
+        var price = $(this).parents(".package-row").find(".price-div").html();
+        price = price.replace("$", "");
+        price = parseFloat(price);
+        
+
+        if ($(this).filter(":checked").length) {
+            cart_total = cart_total + price;
+        }else{
+            cart_total = cart_total - price;
+        }
+
+        $("#cart-total").html(parseFloat(cart_total).toFixed(2));
+    });
 });
