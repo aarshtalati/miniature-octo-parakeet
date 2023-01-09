@@ -99,4 +99,13 @@
 #progressbar li.active:before, #progressbar li.active:after {
     background: #000;
 }
-
+/*added missing css by dev*/
+.fit-image{
+    width: 100%;
+}
+p.form-error{
+    color: #FF3333;
+}
+.astrik{
+    color: #FF3333;
+}

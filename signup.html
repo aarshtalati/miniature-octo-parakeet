@@ -13,6 +13,8 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="jquery.validate.min.js"></script>
+    <script src="additional-methods.min.js"></script>
 </head>
 <body class="container">
     <div>logged in as aarsh</div>
@@ -66,10 +68,10 @@
     <link rel="stylesheet" href="signup.css" type="text/css" />
     <div class="container">
         <div class="row">
-            <div class="col-11">
+            <div class="col-10">
                 <h1>Student Onboarding</h1>
             </div>
-            <div class="col">
+            <div class="col text-end">
                 <i class="fa-solid fa-cart-shopping"></i> $ <span id="cart-total">0.00</span>
             </div>
         </div>
@@ -148,39 +150,39 @@
                                                         disabled />
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <label for="tbStudnetFirstName" class="form-label">Name</label>
+                                            <div class="row mb-3">
+                                                <label for="tbStudnetFirstName" class="form-label">Name <span class="astrik">*</span></label>
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetFirstName"
                                                         data-toggle="tooltip" data-placement="top" data-html="true"
                                                         title="Exactly as it appears on student's official ID"
-                                                        placeholder="First" />
+                                                        placeholder="First" name="tbStudnetFirstName" />
                                                 </div>
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetMiddleName"
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="Exactly as it appears on student's official ID"
-                                                        placeholder="Middle" />
+                                                        placeholder="Middle" name="tbStudnetMiddleName"/>
                                                 </div>
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetLastName"
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="Exactly as it appears on student's official ID"
-                                                        placeholder="Last" />
+                                                        placeholder="Last" name="tbStudnetLastName"/>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
-                                                    <label for="tbStudnetBirthday" class="form-label">Birthday</label>
+                                                    <label for="tbStudnetBirthday" class="form-label">Birthday <span class="astrik">*</span></label>
                                                     <input type="date" class="form-control" id="tbStudnetBirthday"
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="Once entered, it can never be changed again. Exactly as it appears on student's official ID."
-                                                        placeholder=" Secondary Roll Number (auto)" />
+                                                        placeholder=" Secondary Roll Number (auto)" name="tbStudnetBirthday" />
                                                 </div>
                                                 <div class="col">
-                                                    <label for="ddStudentGender" class="form-label">Gender</label>
-                                                    <select id="ddStudentGender" class="form-select" required="">
-                                                        <option value="unspecified">
+                                                    <label for="ddStudentGender" class="form-label">Gender <span class="astrik">*</span></label>
+                                                    <select id="ddStudentGender" name="ddStudentGender" class="form-select">
+                                                        <option value="">Select
                                                         </option>
                                                         <option value="female">
                                                             Girl
@@ -194,9 +196,9 @@
                                                     </select>
                                                 </div>
                                                 <div class="col">
-                                                    <label for="ddStudnetGrade" class="form-label">Grade</label>
-                                                    <select id="ddStudnetGrade" class="form-select" required="">
-                                                        <option value="unspecified">
+                                                    <label for="ddStudnetGrade" class="form-label">Grade <span class="astrik">*</span></label>
+                                                    <select id="ddStudnetGrade" name="ddStudnetGrade" class="form-select">
+                                                        <option value="">Select
                                                         </option>
                                                         <option value="K">
                                                             K
@@ -234,9 +236,9 @@
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <label for="ddStudentTShirtSize" class="form-label">Shirt
-                                                        Size</label>
-                                                    <select id="ddStudentTShirtSize" class="form-select" required="">
-                                                        <option value="unspecified">
+                                                        Size <span class="astrik">*</span></label>
+                                                    <select id="ddStudentTShirtSize" name="ddStudentTShirtSize" class="form-select">
+                                                        <option value="">Select
                                                         </option>
                                                         <option value="youth_s">
                                                             Youth (S)
@@ -265,8 +267,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="col">
-                                                    <label for="ddStudentAllergy" class="form-label">Allergy</label>
-                                                    <select id="ddStudentAllergy" class="form-select" required="">
+                                                    <label for="ddStudentAllergy" class="form-label">Allergy <span class="astrik">*</span></label>
+                                                    <select id="ddStudentAllergy" name="ddStudentAllergy" class="form-select" required="">
                                                         <option value="no_allergy">
                                                             No Allergy
                                                         </option>
@@ -297,7 +299,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col" style="display:none;">
-                                                    <label for="ddStudentDiet" class="form-label">Diet</label>
+                                                    <label for="ddStudentDiet" class="form-label">Diet <span class="astrik">*</span></label>
                                                     <select id="ddStudentDiet" class="form-select" required="">
                                                         <option value="vegetarian">
                                                             Vegetarian
@@ -321,49 +323,49 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <label for="tbStudnetAddress1" class="form-label">Address</label>
+                                                <label for="tbStudnetAddress1" class="form-label">Address <span class="astrik">*</span></label>
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetAddress1"
-                                                        placeholder="Address Line 1" />
+                                                        placeholder="Address Line 1" name="tbStudnetAddress1"/>
                                                 </div>
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetAddress2"
-                                                        placeholder="Address Line 2" />
+                                                        placeholder="Address Line 2" name="tbStudnetAddress2"/>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetAddress3"
-                                                        placeholder="Address Line 3" />
+                                                        placeholder="Address Line 3" name="tbStudnetAddress3"/>
                                                 </div>
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetAddress4"
-                                                        placeholder="Address Line 4" />
+                                                        placeholder="Address Line 4" name="tbStudnetAddress4"/>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetCity"
-                                                        placeholder="City" />
+                                                        placeholder="City" name="tbStudnetCity"/>
                                                 </div>
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetState"
-                                                        placeholder="State" />
+                                                        placeholder="State" name="tbStudnetState"/>
                                                 </div>
                                                 <div class="col">
                                                     <input type="number" class="form-control" id="tbStudnetZip"
-                                                        maxlength="5" min="00000" max="99999" placeholder="Zip" />
+                                                        maxlength="5" min="00000" max="99999" placeholder="Zip" name="tbStudnetZip"/>
                                                 </div>
                                                 <div class="col">
                                                     <input type="text" class="form-control" id="tbStudnetCountry"
-                                                        placeholder="Country" />
+                                                        placeholder="Country" name="tbStudnetCountry"/>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="tbStudentComment">General Comment</label>
-                                                        <textarea class="form-control" id="tbStudentComment"
+                                                        <label for="tbStudentComment">General Comment <span class="astrik">*</span></label>
+                                                        <textarea class="form-control" id="tbStudentComment" name="tbStudentComment"
                                                             rows="3"></textarea>
                                                     </div>
                                                 </div>
@@ -371,8 +373,9 @@
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="tbStudentMedicalNotes">Medical Notes</label>
+                                                        <label for="tbStudentMedicalNotes">Medical Notes <span class="astrik">*</span></label>
                                                         <textarea class="form-control" id="tbStudentMedicalNotes"
+                                                            name="tbStudentMedicalNotes"
                                                             rows="5"
                                                             placeholder="Specify medications, shots, allergy response, restrictions, etc."
                                                             data-toggle="tooltip" data-placement="top"
@@ -395,44 +398,46 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="container">
-                                            <div class="row mb-3">
+                                        <div class="container" id="package_last_row">
+                                            <div class="row mb-3 package-row">
                                                 <div class="col-1">
-                                                    <input type="checkbox" />
+                                                    <input type="checkbox" id="offer1" name="tbStudentPackage" value="Pushtimarg"/>
                                                 </div>
-                                                <div class="col-10">Pushtimarg</div>
-                                                <div class="col">$200</div>
+                                                <label for="offer1" class="col-10">
+                                                    <div>Pushtimarg</div>
+                                                </label>
+                                                <div class="col price-div">$200</div>
                                             </div>
-                                            <div class="row mb-3">
+                                            <div class="row mb-3 package-row">
                                                 <div class="col-1">
-                                                    <input type="checkbox" />
+                                                    <input type="checkbox" id="offer2" name="tbStudentPackage" value="Gujarati"/>
                                                 </div>
-                                                <div class="col-10">Gujarati</div>
-                                                <div class="col">
-                                                    $200
-                                                </div>
+                                                <label for="offer2" class="col-10">
+                                                    <div>Gujarati</div>
+                                                </label>
+                                                <div class="col price-div">$200</div>
                                             </div>
-                                            <div class="row mb-3">
+                                            <div class="row mb-3 package-row">
                                                 <div class="col-1">
-                                                    <input type="checkbox" />
+                                                    <input type="checkbox" id="offer3" name="tbStudentPackage" value="Summer Camp 2023 - Day Camp"/>
                                                 </div>
-                                                <div class="col-10">
-                                                    Summer Camp 2023 - Day Camp
-                                                </div>
-                                                <div class="col">
-                                                    $125
-                                                </div>
+                                                <label for="offer3" class="col-10">
+                                                    <div>
+                                                        Summer Camp 2023 - Day Camp
+                                                    </div>
+                                                </label>
+                                                <div class="col price-div">$125</div>
                                             </div>
-                                            <div class="row mb-3">
+                                            <div class="row mb-3 package-row">
                                                 <div class="col-1">
-                                                    <input type="checkbox" />
+                                                    <input type="checkbox" id="offer4" name="tbStudentPackage" value="Summer Camp 2023 - Overnight"/>
                                                 </div>
-                                                <div class="col-10">
-                                                    Summer Camp 2023 - Overnight
-                                                </div>
-                                                <div class="col">
-                                                    $200
-                                                </div>
+                                                <label for="offer4" class="col-10">
+                                                    <div>
+                                                        Summer Camp 2023 - Overnight
+                                                    </div>
+                                                </label>
+                                                <div class="col price-div">$200</div>
                                             </div>
                                         </div>
                                     </div>
@@ -483,10 +488,10 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <ul class="list-group">
+                                                    <ul class="list-group" id="volunteer_option_wrapper">
                                                         <li class="list-group-item">
                                                             <input class="form-check-input me-1" type="checkbox"
-                                                                value="" id="firstCheckboxStretched" />
+                                                                value="Kitchen" id="firstCheckboxStretched" name="volunteerOption"/>
                                                             <label class="form-check-label stretched-link"
                                                                 for="firstCheckboxStretched">
                                                                 Kitchen
@@ -494,7 +499,7 @@
                                                         </li>
                                                         <li class="list-group-item">
                                                             <input class="form-check-input me-1" type="checkbox"
-                                                                value="" id="secondCheckboxStretched" />
+                                                                value="Vidyalaya" id="secondCheckboxStretched" name="volunteerOption"/>
                                                             <label class="form-check-label stretched-link"
                                                                 for="secondCheckboxStretched">
                                                                 Vidyalaya
@@ -502,7 +507,7 @@
                                                         </li>
                                                         <li class="list-group-item">
                                                             <input class="form-check-input me-1" type="checkbox"
-                                                                value="" id="thirdCheckboxStretched" />
+                                                                value="Teaching" id="thirdCheckboxStretched" name="volunteerOption"/>
                                                             <label class="form-check-label stretched-link"
                                                                 for="thirdCheckboxStretched">
                                                                 Teaching
@@ -510,7 +515,7 @@
                                                         </li>
                                                         <li class="list-group-item">
                                                             <input class="form-check-input me-1" type="checkbox"
-                                                                value="" id="fourthCheckboxStretched" />
+                                                                value="Traffic Control (During Events)" id="fourthCheckboxStretched" name="volunteerOption"/>
                                                             <label class="form-check-label stretched-link"
                                                                 for="fourthCheckboxStretched">
                                                                 Traffic Control (During Events)
@@ -518,7 +523,7 @@
                                                         </li>
                                                         <li class="list-group-item">
                                                             <input class="form-check-input me-1" type="checkbox"
-                                                                value="" id="fifthCheckboxStretched" />
+                                                                value="Events" id="fifthCheckboxStretched" name="volunteerOption"/>
                                                             <label class="form-check-label stretched-link"
                                                                 for="fifthCheckboxStretched">
                                                                 Events
@@ -526,7 +531,7 @@
                                                         </li>
                                                         <li class="list-group-item">
                                                             <input class="form-check-input me-1" type="checkbox"
-                                                                value="" id="sixthCheckboxStretched" />
+                                                                value="Pushthimarg Neej Mandir" id="sixthCheckboxStretched" name="volunteerOption"/>
                                                             <label class="form-check-label stretched-link"
                                                                 for="sixthCheckboxStretched">
                                                                 Pushthimarg Neej Mandir
@@ -542,11 +547,11 @@
                                                                 From
                                                             </label>
                                                             <input type="text" class="form-control" id="from"
-                                                                name="from" />
+                                                                name="from" placeholder="mm/dd/yyyy"/>
                                                             <label for="to">
                                                                 to
                                                             </label>
-                                                            <input type="text" class="form-control" id="to" name="to" />
+                                                            <input type="text" class="form-control" id="to" name="to" placeholder="mm/dd/yyyy"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -558,14 +563,12 @@
                                                         Your contact Information
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row mb-3">
                                                     <div class="col">
-                                                        <input type="phone" class="form-control"
-                                                            placeholder="WhatsApp Number" />
+                                                        <input type="phone" class="form-control" placeholder="WhatsApp Number" id="tbStudentWhatsappNumber" name="tbStudentWhatsappNumber"/>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="email" class="form-control"
-                                                            placeholder="E-mail Address" />
+                                                        <input type="email" class="form-control" placeholder="E-mail Address" id="tbStudentEmail" name="tbStudentEmail"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -589,21 +592,21 @@
                                     <div class="row">
                                         <div class="container">
                                             <div class="row mb-3">
-                                                <label for="tbStudnetAddress1" class="form-label">
-                                                    Credit Card
+                                                <label for="tbStudnetCardNumber" class="form-label">
+                                                    Credit Card <span class="astrik">*</span>
                                                 </label>
                                                 <div class="col">
-                                                    <input type="text" class="form-control" id="tbStudnetAddress1"
-                                                        placeholder="Card Number" />
+                                                    <input type="text" class="form-control" id="tbStudnetCardNumber"
+                                                        placeholder="Card Number" name="tbStudnetCardNumber"/>
                                                 </div>
-                                                <div class="col-1">
-                                                    <input type="text" class="form-control" id="tbStudnetAddress2"
-                                                        placeholder="CVV" />
+                                                <div class="col-2">
+                                                    <input type="text" class="form-control" id="tbStudnetCardCVV"
+                                                        placeholder="CVV" name="tbStudnetCardCVV"/>
                                                 </div>
 
                                                 <div class="col-3">
-                                                    <input type="text" class="form-control" id="tbStudnetAddress3"
-                                                        placeholder="Exp" />
+                                                    <input type="text" class="form-control" id="tbStudnetCardExp"
+                                                        placeholder="Exp" name="tbStudnetCardExp"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -664,6 +667,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </body>
 </html>
