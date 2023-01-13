@@ -20,6 +20,12 @@ $(document).ready(function () {
         ddStudnetGrade: {
           required: true,
         },
+        ddStudentContactType0: {
+          required: true,
+        },
+        ddStudentContactValue0: {
+          required: true,
+        },
         ddStudentTShirtSize: {
           required: true,
         },
@@ -51,12 +57,12 @@ $(document).ready(function () {
         tbStudnetCountry: {
           required: true,
         },
-        tbStudentComment: {
+        /* tbStudentComment: {
           required: true,
         },
         tbStudentMedicalNotes: {
           required: true,
-        },
+        }, */
         /* step 2 validations */
         tbStudentPackage: {
           required: true,
@@ -101,6 +107,12 @@ $(document).ready(function () {
         ddStudnetGrade: {
           required: "Grade is required",
         },
+        ddStudentContactType0: {
+          required: "Contact Type is required",
+        },
+        ddStudentContactValue0: {
+          required: "Contact Value is required",
+        },
         ddStudentTShirtSize: {
           required: "Shirt Size is required",
         },
@@ -132,18 +144,18 @@ $(document).ready(function () {
         tbStudnetCountry: {
           required: "Country is required",
         },
-        tbStudentComment: {
+        /* tbStudentComment: {
           required: "Comment is required",
         },
         tbStudentMedicalNotes: {
           required: "Medical notes are required",
-        },
+        }, */
         /* step 2 validations */
         tbStudentPackage: {
           required: "Select atleast one package",
         },
         /* step 3 validations */
-       /*  volunteerOption: {
+        /*  volunteerOption: {
           required: "Volunteet is required",
         },
         from: {
@@ -175,6 +187,14 @@ $(document).ready(function () {
         }
       },
       focusInvalid: false,
+      highlight: function (element) {
+        $(element).addClass("has-error");
+        $(element).removeClass("no-error");
+      },
+      unhighlight: function (element) {
+        $(element).removeClass("has-error");
+        $(element).addClass("no-error");
+      },
       invalidHandler: function (form, validator) {
         if (!validator.numberOfInvalids()) return;
 
@@ -364,4 +384,168 @@ $(document).ready(function () {
 
         $("#cart-total").html(parseFloat(cart_total).toFixed(2));
     });
+});
+
+var stu_con_count = 0;
+$(document).on("click", "button#add_more", function(){
+  stu_con_count++;
+  $("#student_contact_info").append(
+    '<div class="row mb-3 contact-row">\
+      <div class="col">\
+        <select id="ddStudentContactType' +
+        stu_con_count +
+        '" name="ddStudentContactType' +
+        stu_con_count +
+        '" class="form-select">\
+          <option value="">Contact Type</option><option value="cell">Cell</option>\
+          <option value="email">Email</option>\
+          <option value="home">Home</option>\
+          <option value="work">Work</option>\
+        </select>\
+      </div>\
+      <div class="col">\
+        <input type="text" class="form-control" id="ddStudentContactValue' +
+        stu_con_count +
+        '" data-toggle="tooltip" data-placement="top" title="Contact value" placeholder="Contact value" name="ddStudentContactValue' +
+        stu_con_count +
+        '" />\
+      </div>\
+      <div class="col">\
+        <button type="button" class="btn btn-dark" id="remove_current">\
+            <i class="fa-solid fa-minus"></i>\
+        </button>\
+      </div>\
+    </div>');
+     $("#ddStudentContactType" + stu_con_count).rules("add", {
+       required: true,
+       messages: { required: "Contact Type is required" },
+     });
+     $("#ddStudentContactValue" + stu_con_count).rules("add", {
+       required: true,
+       messages: { required: "Contact Value is required" },
+     });
+});
+$(document).on("click", "button#remove_current", function(e){
+  $(this).parents(".contact-row").remove();
+});
+
+var parent_con_count = 0;
+$(document).on("click", "button#add_more_parent_contact", function() {
+  parent_con_count++;
+  $(this)
+    .parents("#student_parent_contact_info")
+    .append(
+      '<div class="row mt-3 contact-row">\
+      <div class="col">\
+        <select id="ddStudentParentContactType' +
+        parent_con_count +
+        '" name="ddStudentParentContactType' +
+        parent_con_count +
+        '" class="form-select">\
+          <option value="">Contact Type</option><option value="cell">Cell</option>\
+          <option value="email">Email</option>\
+          <option value="home">Home</option>\
+          <option value="work">Work</option>\
+        </select>\
+      </div>\
+      <div class="col">\
+        <input type="text" class="form-control" id="ddStudentParentContactValue' +
+        parent_con_count +
+        '" placeholder="Contact value" name="ddStudentParentContactValue' +
+        parent_con_count +
+        '" />\
+      </div>\
+      <div class="col">\
+        <button type="button" class="btn btn-dark" id="remove_current">\
+            <i class="fa-solid fa-minus"></i>\
+        </button>\
+      </div>\
+    </div>'
+    );
+  $("#ddStudentParentContactType" + parent_con_count).rules("add", {
+    required: true,
+    messages: { required: "Contact Type is required" },
+  });
+  $("#ddStudentParentContactValue" + parent_con_count).rules("add", {
+    required: true,
+    messages: { required: "Contact Value is required" },
+  });
+});
+
+var parent_count = 0;
+$(document).on("click", "button#add_more_parent", function () {
+  parent_count++;
+  $("#student_parent_info").append(
+    '<div class="row pl-10 mt-3 parent-row">\
+    <div class="col-md-11 group-field-col">\
+        <div class="row mt-0 mb-4">\
+            <div class="col-md-3">\
+                <input type="text" class="form-control" id="tbStudnetParentFirstName' +
+      parent_count +
+      '" data-toggle="tooltip" placeholder="First Name" name="tbStudnetParentFirstName' +
+      parent_count +
+      '" />\
+            </div>\
+            <div class="col-md-3">\
+                <input type="text" class="form-control" id="tbStudnetParentMiddleName' +
+      parent_count +
+      '" placeholder="Middle Name" name="tbStudnetParentMiddleName' +
+      parent_count +
+      '" />\
+            </div>\
+            <div class="col-md-3">\
+                <input type="text" class="form-control" id="tbStudnetParentLastName' +
+      parent_count +
+      '" placeholder="Last Name" name="tbStudnetParentLastName' +
+      parent_count +
+      '" />\
+            </div>\
+            <div class="col-md-3">\
+                <input type="text" class="form-control" id="tbStudnetParentRelation' +
+      parent_count +
+      '" placeholder="Relation" name="tbStudnetParentRelation' +
+      parent_count +
+      '" />\
+            </div>\
+        </div>\
+        <hr>\
+        <div id="student_parent_contact_info">\
+            <div class="row contact-row">\
+                <label class="form-label">Contact <span class="astrik">*</span></label>\
+                <div class="col">\
+                    <select id="ddStudentParentContactType0" name="ddStudentParentContactType0" class="form-select">\
+                        <option value="">Contact Type</option>\
+                        <option value="cell">Cell</option>\
+                        <option value="email">Email</option>\
+                        <option value="home">Home</option>\
+                        <option value="work">Work</option>\
+                    </select>\
+                </div>\
+                <div class="col">\
+                    <input type="text" class="form-control" id="ddStudentParentContactValue0" placeholder="Contact value" name="ddStudentParentContactValue0" />\
+                </div>\
+                <div class="col">\
+                    <button type="button" class="btn btn-dark" id="add_more_parent_contact">\
+                        <i class="fa-solid fa-plus"></i>\
+                    </button>\
+                </div>\
+            </div>\
+        </div>\
+    </div>\
+    <div class="col-md-1 align-self-end">\
+        <button type="button" class="btn btn-dark" id="remove_current_parent">\
+            <i class="fa-solid fa-minus"></i>\
+        </button>\
+    </div>\
+  </div>\
+  '
+  );
+});
+
+$(document).on("click", "button#remove_current", function (e) {
+  $(this).parents(".contact-row").remove();
+});
+
+$(document).on("click", "button#remove_current_parent", function (e) {
+  $(this).parents(".parent-row").remove();
 });

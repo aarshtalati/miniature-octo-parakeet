@@ -233,6 +233,107 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="row mt-4">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <label class="form-label">Student Contact <span class="astrik">*</span></label>
+                                                </div>
+                                            </div>
+                                            <div id="student_contact_info" class="mt-0 student-contact-section">
+                                                <div class="row mb-3">
+                                                    <label class="form-label">Contact</label>
+                                                    <div class="col">
+                                                        <select id="ddStudentContactType0" name="ddStudentContactType0" class="form-select">
+                                                            <option value="">Contact Type
+                                                            </option>
+                                                            <option value="cell">
+                                                                Cell
+                                                            </option>
+                                                            <option value="email">
+                                                                Email
+                                                            </option>
+                                                            <option value="home">
+                                                                Home
+                                                            </option>
+                                                            <option value="work">
+                                                                Work
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control" id="ddStudentContactValue0" data-toggle="tooltip" data-placement="top"
+                                                            title="Contact value" placeholder="Contact value" name="ddStudentContactValue0" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="button" class="btn btn-dark" id="add_more">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                 <div class="d-flex align-items-center justify-content-between">
+                                                    <label class="form-label">Parents / Guardians <span class="astrik">*</span></label>
+                                                 </div>
+                                            </div>
+                                                
+                                            <div id="student_parent_info" class="mt-0 mb-4 student-parent-section">
+                                                <div class="row pl-10">
+                                                    <div class="col-md-11 group-field-col">
+                                                        <div class="row mt-0 mb-4">
+                                                            <div class="col-md-3">
+                                                                <input type="text" class="form-control" id="tbStudnetParentFirstName0" data-toggle="tooltip" placeholder="First Name" name="tbStudnetParentFirstName0" />
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input type="text" class="form-control" id="tbStudnetParentMiddleName0" placeholder="Middle Name" name="tbStudnetParentMiddleName0" />
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input type="text" class="form-control" id="tbStudnetParentLastName0" placeholder="Last Name" name="tbStudnetParentLastName0" />
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input type="text" class="form-control" id="tbStudnetParentRelation0" placeholder="Relation" name="tbStudnetParentRelation0" />
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div id="student_parent_contact_info">
+                                                            <div class="row contact-row">
+                                                                <label class="form-label">Contact <span class="astrik">*</span></label>
+                                                                <div class="col">
+                                                                    <select id="ddStudentParentContactType0" name="ddStudentParentContactType0" class="form-select">
+                                                                        <option value="">Contact Type
+                                                                        </option>
+                                                                        <option value="cell">
+                                                                            Cell
+                                                                        </option>
+                                                                        <option value="email">
+                                                                            Email
+                                                                        </option>
+                                                                        <option value="home">
+                                                                            Home
+                                                                        </option>
+                                                                        <option value="work">
+                                                                            Work
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <input type="text" class="form-control" id="ddStudentParentContactValue0" placeholder="Contact value" name="ddStudentParentContactValue0" />
+                                                                </div>
+                                                                <div class="col">
+                                                                    <button type="button" class="btn btn-dark" id="add_more_parent_contact">
+                                                                        <i class="fa-solid fa-plus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1 align-self-end">
+                                                        <button type="button" class="btn btn-dark" id="add_more_parent">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <label for="ddStudentTShirtSize" class="form-label">Shirt
@@ -364,7 +465,7 @@
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="tbStudentComment">General Comment <span class="astrik">*</span></label>
+                                                        <label for="tbStudentComment">General Comment</label>
                                                         <textarea class="form-control" id="tbStudentComment" name="tbStudentComment"
                                                             rows="3"></textarea>
                                                     </div>
@@ -373,7 +474,7 @@
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="tbStudentMedicalNotes">Medical Notes <span class="astrik">*</span></label>
+                                                        <label for="tbStudentMedicalNotes">Medical Notes</label>
                                                         <textarea class="form-control" id="tbStudentMedicalNotes"
                                                             name="tbStudentMedicalNotes"
                                                             rows="5"
@@ -387,7 +488,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next btn btn-dark" value="Next" />
+                            <button type="button" name="next" class="next btn btn-dark">Next</button>
                         </fieldset>
                         <fieldset>
                             <div class="form-card">
