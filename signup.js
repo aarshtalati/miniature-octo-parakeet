@@ -292,9 +292,48 @@ $(document).ready(function () {
         setProgressBar(--current);
     });
 
+
+
     jsonBtnNextStudentSave.addEventListener("click", function(){
-      //store data in JavaScript object
-     // alert("hi");
+    firstname=  document.getElementById("tbStudnetFirstName").value
+
+     // alert(firstname);
+   
+    var data = { 
+      "student":{
+        "student_first":firstname,
+        "student_middle":document.getElementById("tbStudnetMiddleName").value,
+        "student_last":document.getElementById("tbStudnetLastName").value,
+        "student_birthday":document.getElementById("tbStudnetBirthday").value,
+        "student_gender":document.getElementById("ddStudentGender").value,
+        "student_grade":document.getElementById("ddStudnetGrade").value,
+        "student_shirt_size":document.getElementById("ddStudentTShirtSize").value,
+        "student_allergy":document.getElementById("ddStudentAllergy").value,
+        "student_address_line1": "0",
+        "student_address_line2":"1",
+        "student_address_line3":"3",
+        "student_address_line4":"4",
+        "student_address_city":"",
+        "student_address_state":"",
+        "student_address_zip":"343434",
+        "student_address_country":"1",
+        "student_general_comment":"323",
+        "student_medical_comment":"8989",
+        "students_contacts":
+        [
+          {
+            "contact_type":"cell",
+            "value":"89898989898"
+          }
+        ]
+
+
+      }
+
+    }
+    
+    alert(JSON.stringify(data));
+   
       
     });
     function setProgressBar(curStep) {
