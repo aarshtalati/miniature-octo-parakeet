@@ -320,9 +320,14 @@ $(document).ready(function () {
         "students_contacts":
         [
           {
-            "contact_type":"cell",
-            "value":"89898989898"
+            "contact_type": document.getElementById("ddStudentContactType0").value,
+            "value":document.getElementById("ddStudentContactValue0").value
           }
+          // , Need to check if the fields exist below multiple contact enteries
+          // {
+          //   "contact_type": document.getElementById("ddStudentContactType1").value,
+          //   "value":document.getElementById("ddStudentContactValue1").value
+          // }
         ]
 
 
