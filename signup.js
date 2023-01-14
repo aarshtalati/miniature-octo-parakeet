@@ -296,9 +296,6 @@ $(document).ready(function () {
 
     jsonBtnNextStudentSave.addEventListener("click", function(){
     firstname=  document.getElementById("tbStudnetFirstName").value
-
-    
-     // alert(firstname);
    
     var data = { 
       "student":{
@@ -310,16 +307,16 @@ $(document).ready(function () {
         "student_grade":document.getElementById("ddStudnetGrade").value,
         "student_shirt_size":document.getElementById("ddStudentTShirtSize").value,
         "student_allergy":document.getElementById("ddStudentAllergy").value,
-        "student_address_line1": "0",
-        "student_address_line2":"1",
-        "student_address_line3":"3",
-        "student_address_line4":"4",
-        "student_address_city":"",
-        "student_address_state":"",
-        "student_address_zip":"343434",
-        "student_address_country":"1",
-        "student_general_comment":"323",
-        "student_medical_comment":"8989",
+        "student_address_line1": document.getElementById("tbStudnetAddress1").value,
+        "student_address_line2":document.getElementById("tbStudnetAddress2").value,
+        "student_address_line3":document.getElementById("tbStudnetAddress3").value,
+        "student_address_line4":document.getElementById("tbStudnetAddress4").value,
+        "student_address_city":document.getElementById("tbStudnetCity").value,
+        "student_address_state":document.getElementById("tbStudnetState").value,
+        "student_address_zip":document.getElementById("tbStudnetZip").value,
+        "student_address_country":document.getElementById("tbStudnetCountry").value,
+        "student_general_comment":document.getElementById("tbStudentComment").value,
+        "student_medical_comment":document.getElementById("tbStudentMedicalNotes").value,
         "students_contacts":
         [
           {
