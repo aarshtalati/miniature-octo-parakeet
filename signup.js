@@ -297,6 +297,7 @@ $(document).ready(function () {
     jsonBtnNextStudentSave.addEventListener("click", function(){
     firstname=  document.getElementById("tbStudnetFirstName").value
 
+    
      // alert(firstname);
    
     var data = { 
