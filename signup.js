@@ -292,6 +292,11 @@ $(document).ready(function () {
         setProgressBar(--current);
     });
 
+    jsonBtnNextStudentSave.addEventListener("click", function(){
+      //store data in JavaScript object
+     // alert("hi");
+      
+    });
     function setProgressBar(curStep) {
         var percent = parseFloat(100 / steps) * curStep;
         percent = percent.toFixed();
@@ -356,6 +361,8 @@ $(document).ready(function () {
         return false;
     })
 
+    
+    
     $("input[name=volunteerOption]").click(function() {
         var checked = $("input[name=volunteerOption]:checked").length;
         if (checked > 0) {
@@ -549,3 +556,5 @@ $(document).on("click", "button#remove_current", function (e) {
 $(document).on("click", "button#remove_current_parent", function (e) {
   $(this).parents(".parent-row").remove();
 });
+
+
