@@ -20,10 +20,28 @@ $(document).ready(function () {
         ddStudnetGrade: {
           required: true,
         },
-        ddStudentContactType0: {
+        ddStudentContactType_0: {
           required: true,
         },
-        ddStudentContactValue0: {
+        ddStudentContactValue_0: {
+          required: true,
+        },
+        tbStudnetParentFirstName_0: {
+          required: true,
+        },
+        tbStudnetParentMiddleName_0: {
+          required: true,
+        },
+        tbStudnetParentLastName_0: {
+          required: true,
+        },
+        tbStudnetParentRelation_0: {
+          required: true,
+        },
+        ddStudentParentContactType_0_0: {
+          required: true,
+        },
+        ddStudentParentContactValue_0_0: {
           required: true,
         },
         ddStudentTShirtSize: {
@@ -107,10 +125,28 @@ $(document).ready(function () {
         ddStudnetGrade: {
           required: "Grade is required",
         },
-        ddStudentContactType0: {
+        ddStudentContactType_0: {
           required: "Contact Type is required",
         },
-        ddStudentContactValue0: {
+        ddStudentContactValue_0: {
+          required: "Contact Value is required",
+        },
+        tbStudnetParentFirstName_0: {
+          required: "First Name is required",
+        },
+        tbStudnetParentMiddleName_0: {
+          required: "Middle Name is required",
+        },
+        tbStudnetParentLastName_0: {
+          required: "Last Name is required",
+        },
+        tbStudnetParentRelation_0: {
+          required: "Relation is required",
+        },
+        ddStudentParentContactType_0_0: {
+          required: "Contact Type is required",
+        },
+        ddStudentParentContactValue_0_0: {
           required: "Contact Value is required",
         },
         ddStudentTShirtSize: {
@@ -386,17 +422,22 @@ $(document).ready(function () {
     });
 });
 
+var phone_regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+var email_regex =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+var phone_regex_message = "Please enter valid contact number";
+var email_regex_message = "Please enter valid email";
 var stu_con_count = 0;
 $(document).on("click", "button#add_more", function(){
   stu_con_count++;
   $("#student_contact_info").append(
     '<div class="row mb-3 contact-row">\
       <div class="col">\
-        <select id="ddStudentContactType' +
-        stu_con_count +
-        '" name="ddStudentContactType' +
-        stu_con_count +
-        '" class="form-select">\
+        <select id="ddStudentContactType_' +
+      stu_con_count +
+      '" name="ddStudentContactType_' +
+      stu_con_count +
+      '" class="form-select contact-type">\
           <option value="">Contact Type</option><option value="cell">Cell</option>\
           <option value="email">Email</option>\
           <option value="home">Home</option>\
@@ -404,31 +445,32 @@ $(document).on("click", "button#add_more", function(){
         </select>\
       </div>\
       <div class="col">\
-        <input type="text" class="form-control" id="ddStudentContactValue' +
-        stu_con_count +
-        '" data-toggle="tooltip" data-placement="top" title="Contact value" placeholder="Contact value" name="ddStudentContactValue' +
-        stu_con_count +
-        '" />\
+        <input type="text" class="form-control contact-value" id="ddStudentContactValue_' +
+      stu_con_count +
+      '" data-toggle="tooltip" data-placement="top" title="Contact value" placeholder="Contact value" name="ddStudentContactValue_' +
+      stu_con_count +
+      '" />\
       </div>\
       <div class="col">\
         <button type="button" class="btn btn-dark" id="remove_current">\
             <i class="fa-solid fa-minus"></i>\
         </button>\
       </div>\
-    </div>');
-     $("#ddStudentContactType" + stu_con_count).rules("add", {
+    </div>'
+  );
+     $("#ddStudentContactType_" + stu_con_count).rules("add", {
        required: true,
        messages: { required: "Contact Type is required" },
      });
-     $("#ddStudentContactValue" + stu_con_count).rules("add", {
+     $("#ddStudentContactValue_" + stu_con_count).rules("add", {
        required: true,
        messages: { required: "Contact Value is required" },
      });
 });
-$(document).on("click", "button#remove_current", function(e){
+$(document).on("click", "button#remove_current", function(){
   $(this).parents(".contact-row").remove();
 });
-
+var parent_count = 0;
 var parent_con_count = 0;
 $(document).on("click", "button#add_more_parent_contact", function() {
   parent_con_count++;
@@ -437,11 +479,15 @@ $(document).on("click", "button#add_more_parent_contact", function() {
     .append(
       '<div class="row mt-3 contact-row">\
       <div class="col">\
-        <select id="ddStudentParentContactType' +
+        <select id="ddStudentParentContactType_' +
+        parent_count +
+        "_" +
         parent_con_count +
-        '" name="ddStudentParentContactType' +
+        '" name="ddStudentParentContactType_' +
+        parent_count +
+        "_" +
         parent_con_count +
-        '" class="form-select">\
+        '" class="form-select contact-type">\
           <option value="">Contact Type</option><option value="cell">Cell</option>\
           <option value="email">Email</option>\
           <option value="home">Home</option>\
@@ -449,9 +495,13 @@ $(document).on("click", "button#add_more_parent_contact", function() {
         </select>\
       </div>\
       <div class="col">\
-        <input type="text" class="form-control" id="ddStudentParentContactValue' +
+        <input type="text" class="form-control contact-value" id="ddStudentParentContactValue_' +
+        parent_count +
+        "_" +
         parent_con_count +
-        '" placeholder="Contact value" name="ddStudentParentContactValue' +
+        '" placeholder="Contact value" name="ddStudentParentContactValue_' +
+        parent_count +
+        "_" +
         parent_con_count +
         '" />\
       </div>\
@@ -462,48 +512,56 @@ $(document).on("click", "button#add_more_parent_contact", function() {
       </div>\
     </div>'
     );
-  $("#ddStudentParentContactType" + parent_con_count).rules("add", {
-    required: true,
-    messages: { required: "Contact Type is required" },
-  });
-  $("#ddStudentParentContactValue" + parent_con_count).rules("add", {
-    required: true,
-    messages: { required: "Contact Value is required" },
-  });
+  $("#ddStudentParentContactType_" + parent_count + '_' + parent_con_count).rules(
+    "add",
+    {
+      required: true,
+      messages: { required: "Contact Type is required" },
+    }
+  );
+  $("#ddStudentParentContactValue_" + parent_count + '_' + parent_con_count).rules(
+    "add",
+    {
+      required: true,
+      messages: { required: "Contact Value is required" },
+    }
+  );
 });
 
-var parent_count = 0;
+
 $(document).on("click", "button#add_more_parent", function () {
   parent_count++;
+  parent_con_count++;
   $("#student_parent_info").append(
     '<div class="row pl-10 mt-3 parent-row">\
     <div class="col-md-11 group-field-col">\
+        <label class="form-label">Name <span class="astrik">*</span></label>\
         <div class="row mt-0 mb-4">\
             <div class="col-md-3">\
-                <input type="text" class="form-control" id="tbStudnetParentFirstName' +
+                <input type="text" class="form-control" id="tbStudnetParentFirstName_' +
       parent_count +
-      '" data-toggle="tooltip" placeholder="First Name" name="tbStudnetParentFirstName' +
-      parent_count +
-      '" />\
-            </div>\
-            <div class="col-md-3">\
-                <input type="text" class="form-control" id="tbStudnetParentMiddleName' +
-      parent_count +
-      '" placeholder="Middle Name" name="tbStudnetParentMiddleName' +
+      '" data-toggle="tooltip" placeholder="First Name" name="tbStudnetParentFirstName_' +
       parent_count +
       '" />\
             </div>\
             <div class="col-md-3">\
-                <input type="text" class="form-control" id="tbStudnetParentLastName' +
+                <input type="text" class="form-control" id="tbStudnetParentMiddleName_' +
       parent_count +
-      '" placeholder="Last Name" name="tbStudnetParentLastName' +
+      '" placeholder="Middle Name" name="tbStudnetParentMiddleName_' +
       parent_count +
       '" />\
             </div>\
             <div class="col-md-3">\
-                <input type="text" class="form-control" id="tbStudnetParentRelation' +
+                <input type="text" class="form-control" id="tbStudnetParentLastName_' +
       parent_count +
-      '" placeholder="Relation" name="tbStudnetParentRelation' +
+      '" placeholder="Last Name" name="tbStudnetParentLastName_' +
+      parent_count +
+      '" />\
+            </div>\
+            <div class="col-md-3">\
+                <input type="text" class="form-control" id="tbStudnetParentRelation_' +
+      parent_count +
+      '" placeholder="Relation" name="tbStudnetParentRelation_' +
       parent_count +
       '" />\
             </div>\
@@ -513,7 +571,11 @@ $(document).on("click", "button#add_more_parent", function () {
             <div class="row contact-row">\
                 <label class="form-label">Contact <span class="astrik">*</span></label>\
                 <div class="col">\
-                    <select id="ddStudentParentContactType0" name="ddStudentParentContactType0" class="form-select">\
+                    <select id="ddStudentParentContactType_' +
+      parent_count +
+      '_0" name="ddStudentParentContactType_' +
+      parent_count +
+      '_0" class="form-select contact-type">\
                         <option value="">Contact Type</option>\
                         <option value="cell">Cell</option>\
                         <option value="email">Email</option>\
@@ -522,7 +584,11 @@ $(document).on("click", "button#add_more_parent", function () {
                     </select>\
                 </div>\
                 <div class="col">\
-                    <input type="text" class="form-control" id="ddStudentParentContactValue0" placeholder="Contact value" name="ddStudentParentContactValue0" />\
+                    <input type="text" class="form-control contact-value" id="ddStudentParentContactValue_' +
+      parent_count +
+      '_0" placeholder="Contact value" name="ddStudentParentContactValue_' +
+      parent_count +
+      '_0" />\
                 </div>\
                 <div class="col">\
                     <button type="button" class="btn btn-dark" id="add_more_parent_contact">\
@@ -540,12 +606,130 @@ $(document).on("click", "button#add_more_parent", function () {
   </div>\
   '
   );
+
+  $("#tbStudnetParentFirstName_" + parent_count).rules("add", {
+    required: true,
+    messages: { required: "First Name is required" },
+  });
+  $("#tbStudnetParentMiddleName_" + parent_count).rules("add", {
+    required: true,
+    messages: { required: "Middle Name is required" },
+  });
+  $("#tbStudnetParentLastName_" + parent_count).rules("add", {
+    required: true,
+    messages: { required: "Last Name is required" },
+  });
+  $("#tbStudnetParentRelation_" + parent_count).rules("add", {
+    required: true,
+    messages: { required: "Relation is required" },
+  });
+  $("#ddStudentParentContactType_" + parent_count + '_0').rules(
+    "add",
+    {
+      required: true,
+      messages: { required: "Contact Type is required" },
+    }
+  );
+  $("#ddStudentParentContactValue_" + parent_count + '_0').rules("add", {
+    required: true,
+    messages: { required: "Contact Value is required" },
+  });
 });
 
-$(document).on("click", "button#remove_current", function (e) {
+$(document).on("click", "button#remove_current", function () {
   $(this).parents(".contact-row").remove();
 });
 
-$(document).on("click", "button#remove_current_parent", function (e) {
+$(document).on("click", "button#remove_current_parent", function () {
   $(this).parents(".parent-row").remove();
 });
+
+$(document).on("change", "select.contact-type",function(){
+  var contactTypeVal = $(this).val();
+  var ele = $(this);
+  $(this)
+    .parents(".contact-row")
+    .find(".contact-value")
+    .rules("remove", "pattern");
+  if (contactTypeVal == "email") {
+    add_rule(ele, email_regex, email_regex_message);
+  }else{
+    add_rule(ele, phone_regex, phone_regex_message);
+  }
+});
+
+function add_rule(ele, regex, message) {
+  ele.parents(".contact-row")
+    .find(".contact-value")
+    .rules("add", {
+      pattern: regex,
+      messages: { pattern: message },
+    });
+}
+
+function prepareJson(){
+  var student = {
+    student_first: $("#tbStudnetFirstName").val(),
+    student_middle: $("#tbStudnetMiddleName").val(),
+    student_last: $("#tbStudnetLastName").val(),
+    student_birthday: $("#tbStudnetBirthday").val(),
+    student_gender: $("#ddStudentGender").val(),
+    student_grade: $("#ddStudnetGrade").val(),
+    student_shirt_size: $("#ddStudentTShirtSize").val(),
+    student_allergy: $("#ddStudentAllergy").val(),
+    student_address_line1: $("#tbStudnetAddress1").val(),
+    student_address_line2: $("#tbStudnetAddress2").val(),
+    student_address_line3: $("#tbStudnetAddress3").val(),
+    student_address_line4: $("#tbStudnetAddress4").val(),
+    student_address_city: $("#tbStudnetCity").val(),
+    student_address_state: $("#tbStudnetState").val(),
+    student_address_zip: $("#tbStudnetZip").val(),
+    student_address_country: $("#tbStudnetCountry").val(),
+    student_general_comment: $("#tbStudentComment").val(),
+    student_medical_comment: $("#tbStudentMedicalNotes").val(),
+    student_contact: []
+  };
+
+  $("#student_contact_info").find(".contact-row").each(function(){
+    var student_contact_info = {
+      contact_type : $(this).find(".contact-type").val(),
+      value : $(this).find(".contact-value").val()
+    };
+    student.student_contact.push(student_contact_info);
+  });
+  var parent_guardians = [];
+  $("#student_parent_info")
+    .find(".parent-row")
+    .each(function () {
+      var parent_info = {
+        parent_first_name: $(this)
+          .find("input[id^=tbStudnetParentFirstName_]")
+          .val(),
+        parent_middle_name: $(this)
+          .find("input[id^=tbStudnetParentMiddleName_]")
+          .val(),
+        parent_last_name: $(this)
+          .find("input[id^=tbStudnetParentLastName_]")
+          .val(),
+        parent_student_relationship: $(this)
+          .find("input[id^=tbStudnetParentRelation_]")
+          .val(),
+        parent_contacts: [],
+      };
+
+      $(this).find("#student_parent_contact_info").find(".contact-row").each(function(){
+        var parent_contact_info = {
+          contact_type: $(this).find(".contact-type").val(),
+          value: $(this).find(".contact-value").val(),
+        };
+        parent_info.parent_contacts.push(parent_contact_info);
+      });
+
+      parent_guardians.push(parent_info);
+    });
+
+    var data = {
+      student: student,
+      parent_guardians: parent_guardians,
+    };
+}

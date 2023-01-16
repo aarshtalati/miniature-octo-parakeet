@@ -235,14 +235,14 @@
                                             </div>
                                             <div class="row mt-4">
                                                 <div class="d-flex align-items-center justify-content-between">
-                                                    <label class="form-label">Student Contact <span class="astrik">*</span></label>
+                                                    <label class="form-label">Student Contact Information</label>
                                                 </div>
                                             </div>
                                             <div id="student_contact_info" class="mt-0 student-contact-section">
-                                                <div class="row mb-3">
-                                                    <label class="form-label">Contact</label>
+                                                <div class="row mb-3 contact-row">
+                                                    <label class="form-label">Contact <span class="astrik">*</span></label>
                                                     <div class="col">
-                                                        <select id="ddStudentContactType0" name="ddStudentContactType0" class="form-select">
+                                                        <select id="ddStudentContactType_0" name="ddStudentContactType_0" class="form-select contact-type">
                                                             <option value="">Contact Type
                                                             </option>
                                                             <option value="cell">
@@ -260,8 +260,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" id="ddStudentContactValue0" data-toggle="tooltip" data-placement="top"
-                                                            title="Contact value" placeholder="Contact value" name="ddStudentContactValue0" />
+                                                        <input type="text" class="form-control contact-value" id="ddStudentContactValue_0" data-toggle="tooltip" data-placement="top"
+                                                            title="Contact value" placeholder="Contact value" name="ddStudentContactValue_0" />
                                                     </div>
                                                     <div class="col">
                                                         <button type="button" class="btn btn-dark" id="add_more">
@@ -272,25 +272,26 @@
                                             </div>
                                             <div class="row mt-4">
                                                  <div class="d-flex align-items-center justify-content-between">
-                                                    <label class="form-label">Parents / Guardians <span class="astrik">*</span></label>
+                                                    <label class="form-label">Parents / Guardians Information</label>
                                                  </div>
                                             </div>
                                                 
                                             <div id="student_parent_info" class="mt-0 mb-4 student-parent-section">
-                                                <div class="row pl-10">
+                                                <div class="row pl-10 parent-row">
                                                     <div class="col-md-11 group-field-col">
+                                                        <label class="form-label">Name <span class="astrik">*</span></label>
                                                         <div class="row mt-0 mb-4">
                                                             <div class="col-md-3">
-                                                                <input type="text" class="form-control" id="tbStudnetParentFirstName0" data-toggle="tooltip" placeholder="First Name" name="tbStudnetParentFirstName0" />
+                                                                <input type="text" class="form-control" id="tbStudnetParentFirstName_0" data-toggle="tooltip" placeholder="First Name" name="tbStudnetParentFirstName_0" />
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <input type="text" class="form-control" id="tbStudnetParentMiddleName0" placeholder="Middle Name" name="tbStudnetParentMiddleName0" />
+                                                                <input type="text" class="form-control" id="tbStudnetParentMiddleName_0" placeholder="Middle Name" name="tbStudnetParentMiddleName_0" />
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <input type="text" class="form-control" id="tbStudnetParentLastName0" placeholder="Last Name" name="tbStudnetParentLastName0" />
+                                                                <input type="text" class="form-control" id="tbStudnetParentLastName_0" placeholder="Last Name" name="tbStudnetParentLastName_0" />
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <input type="text" class="form-control" id="tbStudnetParentRelation0" placeholder="Relation" name="tbStudnetParentRelation0" />
+                                                                <input type="text" class="form-control" id="tbStudnetParentRelation_0" placeholder="Relation" name="tbStudnetParentRelation_0" />
                                                             </div>
                                                         </div>
                                                         <hr>
@@ -298,7 +299,7 @@
                                                             <div class="row contact-row">
                                                                 <label class="form-label">Contact <span class="astrik">*</span></label>
                                                                 <div class="col">
-                                                                    <select id="ddStudentParentContactType0" name="ddStudentParentContactType0" class="form-select">
+                                                                    <select id="ddStudentParentContactType_0_0" name="ddStudentParentContactType_0_0" class="form-select contact-type">
                                                                         <option value="">Contact Type
                                                                         </option>
                                                                         <option value="cell">
@@ -316,7 +317,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="col">
-                                                                    <input type="text" class="form-control" id="ddStudentParentContactValue0" placeholder="Contact value" name="ddStudentParentContactValue0" />
+                                                                    <input type="text" class="form-control contact-value" id="ddStudentParentContactValue_0_0" placeholder="Contact value" name="ddStudentParentContactValue_0_0" />
                                                                 </div>
                                                                 <div class="col">
                                                                     <button type="button" class="btn btn-dark" id="add_more_parent_contact">
@@ -715,7 +716,7 @@
                                 </div>
                             </div>
                             <input type="button" name="previous" class="previous btn btn-secondary" value="Previous" />
-                            <input type="button" name="next" class="next btn btn-dark" value="Next" />
+                            <input type="button" name="next" id="btStudentSave" class="next btn btn-dark" value="Next" />
                         </fieldset>
                         <fieldset>
                             <div class="form-card">
