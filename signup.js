@@ -294,6 +294,19 @@ $(document).ready(function () {
   $(".next").click(function () {
     current_fs = $(this).parent();
     next_fs = $(this).parent().next();
+
+    /* the below code is of validation for step 3 */
+    var checked = $("input[name=volunteerOption]:checked").length;
+    var from = $("input[name=from]").val();
+    var to = $("input[name=to]").val();
+
+    if (checked > 0 || from != "" || to != "") {
+      phone_email_validation();
+    } else {
+      phone_email_validation("remove");
+    }
+    /* end of validation for step 3 */
+
     if (fv.form()) {
       //Add Class Active
       $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
@@ -386,7 +399,7 @@ $(document).ready(function () {
     return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + seg;
   };
   $("#btStudentSave").click(function () {
-    var current_date = GetFormattedDate(new Date());
+    /* var current_date = GetFormattedDate(new Date());
     data = JSON.stringify({
       gokuldham_id: "22GD01",
       roll_number: "1010",
@@ -407,18 +420,21 @@ $(document).ready(function () {
       is_active: 1,
       created_date: current_date,
       modified_date: current_date,
-    });
-    url = "/api/poststudent/";
-    post_student(url, data);
+    }); */
+    if (fv.form()) {
+      url = "/api/poststudent/";
+      const formData = JSON.stringify(prepareJson());
+      post_student(url, formData);
+    }
+    
   });
 
   $(".submit").click(function () {
     return false;
   });
 
-  $("input[name=volunteerOption]").click(function () {
-    var checked = $("input[name=volunteerOption]:checked").length;
-    if (checked > 0) {
+  function phone_email_validation(type = "add") {
+    if (type == "add") {
       $("#tbStudentWhatsappNumber").rules("add", {
         required: true,
         messages: {
@@ -435,7 +451,9 @@ $(document).ready(function () {
       $("#tbStudentWhatsappNumber").rules("remove", "required");
       $("#tbStudentEmail").rules("remove", "required");
     }
-  });
+  }
+
+  /* this is used to calculate cart total based on selected offers */
   var cart_total = parseFloat($("#cart-total").html());
   $("input[name=tbStudentPackage]").click(function () {
     var price = $(this).parents(".package-row").find(".price-div").html();
@@ -752,8 +770,35 @@ function prepareJson() {
       parent_guardians.push(parent_info);
     });
 
+  var studentPackage = [];
+  $("input[name=tbStudentPackage]:checked").each(function (i) {
+    studentPackage[i] = parseInt($(this).val());
+  });
+
+  var volunteerOption = [];
+  $("input[name=volunteerOption]:checked").each(function (i) {
+    volunteerOption[i] = parseInt($(this).val());
+  });
+
   var data = {
     student: student,
     parent_guardians: parent_guardians,
+    offerings: studentPackage,
+    volunteer_sponsorship: {
+      volunteer_choices: volunteerOption,
+      sponsor_lunch: {
+        start_date: $("input#from").val(),
+        end_date: $("input#to").val(),
+      },
+      phone: $("input#tbStudentWhatsappNumber").val(),
+      email: $("input#tbStudentEmail").val(),
+    },
+    payment: {
+      card_number: $("input#tbStudnetCardNumber").val(),
+      cvv: $("input#tbStudnetCardCVV").val(),
+      expiry: $("input#tbStudnetCardExp").val(),
+    },
   };
+  console.log("formData", data);
+  return data;
 }
